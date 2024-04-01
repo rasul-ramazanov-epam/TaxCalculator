@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TaxCalculator.DB.Models;
+using TaxCalculator.DB.Repositories.AbstractRepositories;
 
 namespace TaxCalculator.DB.Repositories
 {
-    public class TaxCalculationResultRepository
+    public class TaxCalculationResultRepository : ITaxCalculationResultRepository
     {
         private readonly TaxCalculatorContext _context;
 
