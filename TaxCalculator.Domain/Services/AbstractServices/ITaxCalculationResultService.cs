@@ -6,6 +6,6 @@ namespace TaxCalculator.Domain.Services.AbstractServices
     {
         Task<List<TaxCalculationResultDTO>> GetAllResults();
         Task AddResult(TaxCalculationResultDTO item);
-        Task<TaxCalculationResultDTO> CalculateTax(int value, List<TaxBandDTO> taxBands);
+        Task<TaxCalculationResultDTO> CalculateTax(decimal value, List<TaxBandDTO> taxBands);
     }
 }

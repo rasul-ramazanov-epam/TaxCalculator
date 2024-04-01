@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TaxCalculator.DB.Models;
 using TaxCalculator.Domain.Services.AbstractServices;
 
 namespace TaxCalculator.Controllers
@@ -17,12 +18,14 @@ namespace TaxCalculator.Controllers
             _calculationResultService = calculationResultService;
         }
 
-        [HttpPost]
-        public async Task CalculateTax([FromBody] int value)
+        [HttpPost("calculate")]
+        public async Task<TaxCalculationResultDTO> CalculateTax([FromBody] decimal value)
         {
             var taxBands = await _taxBandService.GetAllTaxBands();
             var result = await _calculationResultService.CalculateTax(value, taxBands);
             await _calculationResultService.AddResult(result);
+
+            return result;
         }
     }
 }

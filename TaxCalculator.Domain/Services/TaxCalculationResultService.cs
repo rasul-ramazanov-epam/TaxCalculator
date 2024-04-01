@@ -29,14 +29,14 @@ namespace TaxCalculator.Domain.Services
             await _taxCalculationResultRepository.AddResult(result);
         }
 
-        public async Task<TaxCalculationResultDTO> CalculateTax(int value, List<TaxBandDTO> taxBands)
+        public async Task<TaxCalculationResultDTO> CalculateTax(decimal value, List<TaxBandDTO> taxBands)
         {
             decimal totalTaxPaid = 0;
             foreach (var taxBand in taxBands)
             {
                 if (value > taxBand.LowerLimit)
                 {
-                    decimal taxableAmount = value - taxBand.LowerLimit;
+                    decimal taxableAmount = (Math.Min(value, taxBand.UpperLimit) - taxBand.LowerLimit);
                     decimal taxPaid = taxableAmount * (decimal)taxBand.TaxRate / 100;
                     totalTaxPaid += taxPaid;
                 }

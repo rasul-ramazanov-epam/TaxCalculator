@@ -23,8 +23,8 @@ export class TaxCalculatorComponent {
   constructor(private http: HttpClient) { }
 
   calculateTax(): void {
-    const url = 'api/taxcalculator/calculate';
-    const requestBody = { grossSalary: this.grossSalary };
+    const url = `https://localhost:7077/api/tax/calculate`;
+    const requestBody = this.grossSalary;
 
     this.http.post<TaxCalculationResult>(url, requestBody).subscribe(result => {
       this.taxCalculationResult = result;
