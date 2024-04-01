@@ -14,11 +14,7 @@ interface TaxCalculationResult {
 })
 export class TaxCalculatorComponent {
   grossSalary: number = 0;
-  taxCalculationResult: TaxCalculationResult = {
-    grossAnnualSalary: 0,
-    netAnnualSalary: 0,
-    annualTaxPaid: 0,
-  };
+  taxCalculationResult: TaxCalculationResult | undefined;
 
   constructor(private http: HttpClient) { }
 
@@ -29,13 +25,5 @@ export class TaxCalculatorComponent {
     this.http.post<TaxCalculationResult>(url, requestBody).subscribe(result => {
       this.taxCalculationResult = result;
     });
-  }
-
-  get netSalary(): number {
-    return this.taxCalculationResult.netAnnualSalary;
-  }
-
-  get annualTaxPaid(): number {
-    return this.taxCalculationResult.annualTaxPaid;
   }
 }

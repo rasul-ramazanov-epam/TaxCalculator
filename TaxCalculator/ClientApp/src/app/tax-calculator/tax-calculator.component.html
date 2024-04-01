@@ -1,8 +1,12 @@
 <div>
   <label for="grossSalary">Gross Annual Salary:</label>
-  <input type="number" id="grossSalary" [(ngModel)]="grossSalary" step="1000" />
+  <input type="number" id="grossSalary" [(ngModel)]="grossSalary" step="1000" min="0" required #grossSalaryInput="ngModel" />
 
-  <button (click)="calculateTax()">Calculate</button>
+  <button (click)="calculateTax()" [disabled]="grossSalaryInput.invalid && grossSalaryInput.dirty">Calculate</button>
+
+  <div *ngIf="grossSalaryInput.invalid && grossSalaryInput.dirty" class="error-message">
+    Gross Annual Salary is required and must be a positive number.
+  </div>
 </div>
 
 <hr>
