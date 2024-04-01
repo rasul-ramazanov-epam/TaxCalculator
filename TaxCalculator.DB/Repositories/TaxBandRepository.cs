@@ -15,7 +15,7 @@ namespace TaxCalculator.DB.Repositories
 
         public async Task<List<TaxBand>> GetAllTaxBands()
         {
-            return await _context.TaxBands.OrderBy(t => t.UpperLimit).AsNoTracking().ToListAsync();
+            return await _context.TaxBands.OrderByDescending(t => t.UpperLimit).AsNoTracking().ToListAsync();
         }
     }
 }

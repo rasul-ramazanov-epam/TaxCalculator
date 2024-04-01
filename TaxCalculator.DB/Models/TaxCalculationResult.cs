@@ -6,8 +6,8 @@ namespace TaxCalculator.DB.Models
     {
         [Key]
         public int TaxCalculationResultId { get; set; }
-        public int GrossAnnualSalary { get; set; }
-        public int NetAnnualSalary { get; set; }
-        public int AnnualTaxPaid { get; set; }
+        public decimal GrossAnnualSalary { get; set; }
+        public decimal NetAnnualSalary { get; set; }
+        public decimal AnnualTaxPaid { get; set; }
     }
 }

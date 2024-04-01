@@ -28,5 +28,30 @@ namespace TaxCalculator.Domain.Services
             var result = _mapper.Map<TaxCalculationResult>(item);
             await _taxCalculationResultRepository.AddResult(result);
         }
+
+        public async Task<TaxCalculationResultDTO> CalculateTax(int value, List<TaxBandDTO> taxBands)
+        {
+            decimal totalTaxPaid = 0;
+            foreach (var taxBand in taxBands)
+            {
+                if (value > taxBand.LowerLimit)
+                {
+                    decimal taxableAmount = value - taxBand.LowerLimit;
+                    decimal taxPaid = taxableAmount * (decimal)taxBand.TaxRate / 100;
+                    totalTaxPaid += taxPaid;
+                }
+            }
+
+            decimal netAnnualSalary = value - totalTaxPaid;
+
+            var calculationResult = new TaxCalculationResultDTO
+            {
+                GrossAnnualSalary = value,
+                NetAnnualSalary = netAnnualSalary,
+                AnnualTaxPaid = totalTaxPaid,
+            };
+
+            return calculationResult;
+        }
     }
 }
